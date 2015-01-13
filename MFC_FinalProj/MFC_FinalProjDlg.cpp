@@ -747,12 +747,11 @@ void CMFC_FinalProjDlg::OnNMClickClassTable(NMHDR *pNMHDR, LRESULT *pResult)
 void CMFC_FinalProjDlg::OnCbnSelchangeAddClass()
 {
 	int cho = m_com_addclass.GetCount() - m_com_addclass.GetCurSel() -1;
-	int new_entry = chosen->size();
 	try{
 		CString msg = (*courses)[cho]->toString() + _T("\n要加入課表嗎？");
 		ConfirmBox Dlg(&msg);
 		if (Dlg.DoModal() == IDOK){
-			(*courses)[cho]->to_list(&m_list_classtable,class_table,new_entry);
+			(*courses)[cho]->to_list(&m_list_classtable,class_table,cho);
 			(*courses)[cho]->to_combobox(&m_com_unset);
 			chosen->push_back(cho);
 			credit += (*courses)[cho]->credits;
@@ -774,7 +773,7 @@ void CMFC_FinalProjDlg::OnCbnSelchangeUnset()
 		CString msg = (*courses)[r_index]->toString() + _T("\n要從課表中移除嗎？");
 		ConfirmBox Dlg(&msg);
 		if (Dlg.DoModal() == IDOK){
-			(*courses)[r_index]->to_list(&m_list_classtable,class_table,cho,true);
+			(*courses)[r_index]->to_list(&m_list_classtable,class_table,r_index,true);
 			m_com_unset.DeleteString(selection);
 			chosen->erase(chosen->begin() + cho,chosen->begin() + cho + 1);
 			credit -= (*courses)[r_index]->credits;
