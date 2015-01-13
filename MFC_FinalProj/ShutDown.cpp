@@ -76,7 +76,7 @@ void CShutDown::OnBnClickedOk()
 		else
 			sender.rebootflag = false;
 
-		CWnd* pWnd = CWnd::FindWindowW(NULL, L"¥D­¶­±");
+		CWnd* pWnd = CWnd::GetParent();
 		pWnd->SendMessageW(WM_MYMESSAGE_SENDSHUTDOWNTOMAIN, (WPARAM)&sender);
 		CDialogEx::OnOK();
 	}

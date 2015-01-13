@@ -96,7 +96,7 @@ void CClockChange::OnBnClickedOk()
 		m_combo_sec.GetWindowText(newclock.newclock.sec);
 		m_edit_path.GetWindowText(newclock.newclock.path);
 
-		CWnd* pWnd = CWnd::FindWindowW(NULL, L"¾xÄÁ³]©w");
+		CWnd* pWnd = CWnd::GetParent();
 		pWnd->SendMessageW(WM_MYMESSAGE_SENDTOCLOCKMAIN2, (WPARAM)&newclock);
 		CDialogEx::OnOK();
 	}

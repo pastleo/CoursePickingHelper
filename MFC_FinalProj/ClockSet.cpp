@@ -76,7 +76,7 @@
 			m_ComboBoxSec.GetWindowText(newclock.sec);
 			m_EditPath.GetWindowText(newclock.path);
 
-			CWnd* pWnd = CWnd::FindWindowW(NULL, L"¾xÄÁ³]©w");
+			CWnd* pWnd = CWnd::GetParent();
 			pWnd->SendMessageW(WM_MYMESSAGE_SENDTOCLOCKMAIN, (WPARAM)&newclock);
 
 			CDialogEx::OnOK();

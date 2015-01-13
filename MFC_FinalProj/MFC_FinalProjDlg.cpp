@@ -306,7 +306,7 @@ LRESULT CMFC_FinalProjDlg::rcvfromClockMain(WPARAM wParam, LPARAM lParam)
 void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 在此加入您的訊息處理常式程式碼和 (或) 呼叫預設值
-	if (nIDEvent == 1)
+	if (nIDEvent == 1)											//鬧鐘timer
 	{
 		CTime now = CTime::GetCurrentTime();
 		CString nowstr, msgboxstr;
@@ -374,7 +374,7 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		}
 	}
 
-	if (nIDEvent == 2)
+	if (nIDEvent == 2)						//倒數計時timer
 	{
 		int sec, min, hr;
 		CString tp;
@@ -422,7 +422,7 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		}
 	}
 
-	if (nIDEvent == 3) 
+	if (nIDEvent == 3)					//碼表timer
 	{
 		int hr, min, sec;
 		CString tp;
@@ -445,7 +445,8 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		stopwatch[2].Format(L"%d", sec);;
 	}
 
-	if (nIDEvent == 4) {
+	if (nIDEvent == 4)								//定時關機timer
+	{
 		CTime now = CTime::GetCurrentTime();
 		CString nowstr;
 		int nowhr, nowmin, nowsec, nowallsec;
@@ -460,11 +461,15 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		setsec = _wtoi(rcv.clock.sec);
 		setallsec = sethr*3600 + setmin*60 + setsec;
 
-		if (setallsec-nowallsec <= 60 && rcv.rebootflag == false)
+		int minus = setallsec-nowallsec;
+		if (minus < 0)
+			minus += 86400;
+
+		if (minus <= 60 && rcv.rebootflag == false)
 		{ //剩下1min內發視窗警告
 			ShutdownSystem(L"本電腦即將在1分鐘內「關機」，請將尚未儲存的文件盡快儲存，以免遺失。", rcv.rebootflag); 
 		}
-		else if (setallsec-nowallsec <= 60 && rcv.rebootflag == true)
+		else if (minus <= 60 && rcv.rebootflag == true)
 		{
 			ShutdownSystem(L"本電腦即將在1分鐘內「重新開機」，請將尚未儲存的文件盡快儲存，以免遺失。", rcv.rebootflag); 
 		}

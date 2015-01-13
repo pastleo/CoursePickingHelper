@@ -210,7 +210,8 @@ void CClockMain::OnBnClickedOk()
 			liveclock[j++].path = clock[i].path;
 		}
 	}
-	CWnd* pWnd = CWnd::FindWindowW(NULL, L"¥D­¶­±");
+
+	CWnd* pWnd = CWnd::GetParent();
 	pWnd->SendMessageW(WM_MYMESSAGE_SENDTOMAIN, (WPARAM)&Sender);
 
 

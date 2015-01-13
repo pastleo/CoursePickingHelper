@@ -78,7 +78,7 @@ void CCountDown::OnBnClickedOk()
 		m_combo_sec.GetWindowText(send[2]);
 		m_edit_path.GetWindowText(send[3]);
 
-		CWnd* pWnd = CWnd::FindWindowW(NULL, L"¥D­¶­±");
+		CWnd* pWnd = CWnd::GetParent();
 		pWnd->SendMessageW(WM_MYMESSAGE_SENDCOUNTDOWNDATA, (WPARAM)&send);
 
 		CDialogEx::OnOK();
