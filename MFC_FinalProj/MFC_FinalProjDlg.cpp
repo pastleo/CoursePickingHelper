@@ -672,15 +672,6 @@ void CMFC_FinalProjDlg::OnBnClickedImport()
 		{  
 			fname = FileDlg.GetPathName();
 			ifstream in(fname);
-			/*
-			CFile f(fname,CFile::modeRead | CFile::typeUnicode);
-			long long length = f.GetLength();
-			char* tmp = new char[length];
-			f.Read(tmp,length);
-			string src(tmp);
-			delete tmp;
-			f.Close();
-			*/
 
 			Json::Reader reader;
 			Json::Value rootV;

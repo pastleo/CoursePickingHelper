@@ -1,0 +1,845 @@
+{
+    "course": [{
+        "credits": "3",
+        "number_parsed": 45,
+        "credits_parsed": 3,
+        "title": "計算機程式設計 a Computer Programming",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U701",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 5,
+            "time": [1, 2, 3]
+        }],
+        "time": "5123",
+        "year": "半",
+        "language": "中文",
+        "professor": "顏增昌",
+        "number": "45",
+        "code": "1227",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "統計學(一) a Statistics(I)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U402",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 4,
+            "time": [2]
+        }, {
+            "day": 5,
+            "time": [7, 8]
+        }],
+        "time": "42,578",
+        "year": "半",
+        "language": "中文",
+        "professor": "沈宗荏",
+        "number": "60",
+        "code": "1230",
+        "department": "應數系"
+    }, {
+        "credits": "4",
+        "number_parsed": 50,
+        "credits_parsed": 4,
+        "title": "微積分(二) A Calculus(II)",
+        "obligatory": "必修",
+        "hours": "4",
+        "obligatory_tf": true,
+        "location": "U414",
+        "hours_parsed": 4,
+        "time_parsed": [{
+            "day": 1,
+            "time": [7, 8]
+        }, {
+            "day": 3,
+            "time": [1, 2]
+        }],
+        "time": "178,312",
+        "year": "全",
+        "language": "中文",
+        "professor": "柯志斌",
+        "number": "50",
+        "code": "1232",
+        "department": "應數系"
+    }, {
+        "hours_parsed": 3,
+        "credits": "1",
+        "time_parsed": [{
+            "day": 3,
+            "time": [5, 6, 7]
+        }],
+        "title": "普通物理學實驗 c General Physics Lab",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "S2A05",
+        "department": "物理系",
+        "credits_parsed": 1,
+        "time": "3567",
+        "year": "全",
+        "language": "中文",
+        "number_parsed": 60,
+        "number": "60",
+        "code": "1267",
+        "professor": "黃家健"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "普通物理學 d General Physics",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U414",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [3, 4]
+        }, {
+            "day": 5,
+            "time": [4]
+        }],
+        "time": "134,54",
+        "year": "全",
+        "language": "中文",
+        "professor": "楊淳青",
+        "number": "60",
+        "code": "1283",
+        "department": "物理系"
+    }, {
+        "credits": "4",
+        "number_parsed": 50,
+        "credits_parsed": 4,
+        "title": "高等微積分(下) a Advanced Calculus(II)",
+        "obligatory": "必修",
+        "hours": "4",
+        "previous": "高等微積分(上)",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 4,
+        "time_parsed": [{
+            "day": 2,
+            "time": [3, 4]
+        }, {
+            "day": 4,
+            "time": [3, 4]
+        }],
+        "time": "234,434",
+        "year": "半",
+        "language": "中文",
+        "professor": "吳菁菁",
+        "number": "50",
+        "code": "2316",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "動力學 Z Dynamics",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U302",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [7, 8]
+        }, {
+            "day": 4,
+            "time": [1]
+        }],
+        "time": "178,41",
+        "year": "半",
+        "language": "中文",
+        "professor": "王輝清",
+        "number": "60",
+        "code": "2318",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "機率論 a Introduction to Probability",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [7, 8]
+        }, {
+            "day": 4,
+            "time": [7]
+        }],
+        "time": "378,47",
+        "year": "半",
+        "language": "中文",
+        "professor": "林長鋆",
+        "number": "60",
+        "code": "2320",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "開放系統(一) Z Open System(I)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 2,
+            "time": [5, 6, 7]
+        }],
+        "time": "2567",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳焜燦等",
+        "number": "60",
+        "code": "2322",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "常微分方程 a Differential Equations",
+        "obligatory": "必修",
+        "hours": "3",
+        "previous": "微積分 等",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 2,
+            "time": [8, 9]
+        }, {
+            "day": 4,
+            "time": [6]
+        }],
+        "time": "289,46",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳齊康",
+        "number": "60",
+        "code": "2323",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "向量分析 a Vector Analysis",
+        "obligatory": "必修",
+        "hours": "3",
+        "previous": "微積分 等",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [5, 6]
+        }, {
+            "day": 3,
+            "time": [2]
+        }],
+        "time": "156,32",
+        "year": "半",
+        "language": "中文",
+        "professor": "許訓評",
+        "number": "60",
+        "code": "2325",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "線性代數(二) a Linear Algebra(II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [3, 4]
+        }, {
+            "day": 4,
+            "time": [2]
+        }],
+        "time": "334,42",
+        "year": "半",
+        "language": "中文",
+        "professor": "蔡亞倫",
+        "number": "60",
+        "code": "2327",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "離散數學(二) a Discrete Mathematics(II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U301",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [9]
+        }, {
+            "day": 3,
+            "time": [5, 6]
+        }],
+        "time": "19,356",
+        "year": "半",
+        "language": "中文",
+        "professor": "李渭天",
+        "number": "60",
+        "code": "2329",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "作業研究 (二) Z Operations Research (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [3, 4]
+        }, {
+            "day": 3,
+            "time": [8]
+        }],
+        "time": "134,38",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳律閎",
+        "number": "60",
+        "code": "3322",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "近世代數 Z Modern Algebra",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U402",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [5, 6]
+        }, {
+            "day": 2,
+            "time": [4]
+        }],
+        "time": "156,24",
+        "year": "半",
+        "language": "中文",
+        "professor": "郭容妙",
+        "number": "60",
+        "code": "3324",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "複變函數論 Z Functions of Complex Variables",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [5, 6, 7]
+        }],
+        "time": "3567",
+        "year": "半",
+        "language": "中文",
+        "professor": "李源泉",
+        "number": "60",
+        "code": "3326",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數值分析(二) Z Numerical Analysis (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "previous": "數值分析(一)",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [6, 7, 8]
+        }],
+        "time": "1678",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳鵬文",
+        "number": "60",
+        "code": "3328",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 45,
+        "credits_parsed": 3,
+        "title": "計算機結構 Z Computer Architecture",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U402",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [1, 2]
+        }, {
+            "day": 4,
+            "time": [1]
+        }],
+        "time": "112,41",
+        "year": "半",
+        "language": "中文",
+        "professor": "顏增昌",
+        "number": "45",
+        "code": "3330",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數理統計(二) Z Mathematical Statistics (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [1, 2]
+        }, {
+            "day": 5,
+            "time": [1]
+        }],
+        "time": "112,51",
+        "year": "半",
+        "language": "中文",
+        "professor": "許英麟",
+        "number": "60",
+        "code": "3332",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數學規劃(二) Z Mathematical Programming (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 5,
+            "time": [2, 3, 4]
+        }],
+        "time": "5234",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳齊康",
+        "number": "60",
+        "code": "3334",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 35,
+        "credits_parsed": 3,
+        "title": "作業系統專題(二) Z Special Topics in Operating Systems (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U511",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [2, 3, 4]
+        }],
+        "time": "3234",
+        "year": "半",
+        "language": "中文",
+        "professor": "許昌旺",
+        "number": "35",
+        "code": "3337",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 45,
+        "credits_parsed": 3,
+        "title": "計算軟體應用(一) Z Applications of Computing Software (I)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U701",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 4,
+            "time": [5, 6, 7]
+        }],
+        "time": "4567",
+        "year": "半",
+        "language": "中文",
+        "professor": "王輝清",
+        "number": "45",
+        "code": "3339",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "拓樸與幾何學(二) Z Topology and Geometry (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U724",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [7]
+        }, {
+            "day": 4,
+            "time": [3, 4]
+        }],
+        "time": "17,434",
+        "year": "半",
+        "language": "中文",
+        "professor": "許訓評",
+        "number": "60",
+        "code": "3341",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "材料力學(二) Z Strength of Materials (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U519",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 2,
+            "time": [5, 6, 7]
+        }],
+        "time": "2567",
+        "year": "半",
+        "language": "中文",
+        "professor": "李林滄",
+        "number": "60",
+        "code": "3343",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "電腦力學模擬 Z Simulation of Computational Mechanics",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 5,
+            "time": [5, 6, 7]
+        }],
+        "time": "5567",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳焜燦",
+        "number": "60",
+        "code": "3345",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "作業研究 (二) Z Operations Research (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [3, 4]
+        }, {
+            "day": 3,
+            "time": [8]
+        }],
+        "time": "134,38",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳律閎",
+        "number": "60",
+        "code": "3322",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "近世代數 Z Modern Algebra",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U402",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [5, 6]
+        }, {
+            "day": 2,
+            "time": [4]
+        }],
+        "time": "156,24",
+        "year": "半",
+        "language": "中文",
+        "professor": "郭容妙",
+        "number": "60",
+        "code": "3324",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "複變函數論 Z Functions of Complex Variables",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [5, 6, 7]
+        }],
+        "time": "3567",
+        "year": "半",
+        "language": "中文",
+        "professor": "李源泉",
+        "number": "60",
+        "code": "3326",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數值分析(二) Z Numerical Analysis (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "previous": "數值分析(一)",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [6, 7, 8]
+        }],
+        "time": "1678",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳鵬文",
+        "number": "60",
+        "code": "3328",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 45,
+        "credits_parsed": 3,
+        "title": "計算機結構 Z Computer Architecture",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U402",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [1, 2]
+        }, {
+            "day": 4,
+            "time": [1]
+        }],
+        "time": "112,41",
+        "year": "半",
+        "language": "中文",
+        "professor": "顏增昌",
+        "number": "45",
+        "code": "3330",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數理統計(二) Z Mathematical Statistics (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [1, 2]
+        }, {
+            "day": 5,
+            "time": [1]
+        }],
+        "time": "112,51",
+        "year": "半",
+        "language": "中文",
+        "professor": "許英麟",
+        "number": "60",
+        "code": "3332",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "數學規劃(二) Z Mathematical Programming (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 5,
+            "time": [2, 3, 4]
+        }],
+        "time": "5234",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳齊康",
+        "number": "60",
+        "code": "3334",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 35,
+        "credits_parsed": 3,
+        "title": "作業系統專題(二) Z Special Topics in Operating Systems (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U511",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 3,
+            "time": [2, 3, 4]
+        }],
+        "time": "3234",
+        "year": "半",
+        "language": "中文",
+        "professor": "許昌旺",
+        "number": "35",
+        "code": "3337",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 45,
+        "credits_parsed": 3,
+        "title": "計算軟體應用(一) Z Applications of Computing Software (I)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U701",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 4,
+            "time": [5, 6, 7]
+        }],
+        "time": "4567",
+        "year": "半",
+        "language": "中文",
+        "professor": "王輝清",
+        "number": "45",
+        "code": "3339",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "拓樸與幾何學(二) Z Topology and Geometry (II)",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U724",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 1,
+            "time": [7]
+        }, {
+            "day": 4,
+            "time": [3, 4]
+        }],
+        "time": "17,434",
+        "year": "半",
+        "language": "中文",
+        "professor": "許訓評",
+        "number": "60",
+        "code": "3341",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "材料力學(二) Z Strength of Materials (II)",
+        "obligatory": "必修",
+        "hours": "3",
+        "obligatory_tf": true,
+        "location": "U519",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 2,
+            "time": [5, 6, 7]
+        }],
+        "time": "2567",
+        "year": "半",
+        "language": "中文",
+        "professor": "李林滄",
+        "number": "60",
+        "code": "3343",
+        "department": "應數系"
+    }, {
+        "credits": "3",
+        "number_parsed": 60,
+        "credits_parsed": 3,
+        "title": "電腦力學模擬 Z Simulation of Computational Mechanics",
+        "obligatory": "選修",
+        "hours": "3",
+        "obligatory_tf": false,
+        "location": "U517",
+        "hours_parsed": 3,
+        "time_parsed": [{
+            "day": 5,
+            "time": [5, 6, 7]
+        }],
+        "time": "5567",
+        "year": "半",
+        "language": "中文",
+        "professor": "陳焜燦",
+        "number": "60",
+        "code": "3345",
+        "department": "應數系"
+    }]
+}

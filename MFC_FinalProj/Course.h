@@ -11,7 +11,9 @@ public:
 	std::vector<Course_time*>* time;
 	int credits;
 	CString* location;
+	CString* department;
 	CString* code;
+	CString* professor;
 	bool obligatory;
 
 	static void set_list_head(CListCtrl* listView);

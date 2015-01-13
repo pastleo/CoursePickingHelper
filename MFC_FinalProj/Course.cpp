@@ -3,22 +3,25 @@
 
 using namespace std;
 
+CString* utf8ToCString(char* utf8str)
+{
+	int size = MultiByteToWideChar(CP_UTF8, 0, utf8str, -1, NULL, 0);
+	wchar_t *pWStr = new wchar_t[size+1];
+	MultiByteToWideChar(CP_UTF8, 0, utf8str, -1, pWStr, size);
+	CString* cstr = new CString(pWStr);
+	delete pWStr;
+	return cstr;
+}
+
 Course::Course(Json::Value* data)
 {
 	#define D (*data)
 	if(!D.isObject())
 		throw new CString("Json for Course not valid!");
 
-	if(!D["title"].isString())
-		throw new CString("Json for Course not valid!");
+#define addstr(X) if(!D[#X].isString()) throw new CString("Json for Course not valid!"); this->X = utf8ToCString((char*) D[#X].asCString());
 
-	// Cant solve this... Utf8 to Unicode problem...
-	//std::string a = D["title"].asString();
-	//CStringT a(D["title"].asString());
-	//this->title = (UTF8toUTF16(a));
-	//CString ss(CA2T(D["title"].asString()));
-	
-	this->title = new CString(D["title"].asCString());
+	addstr(title)
 
 	Json::Value tmp = D["time_parsed"];
 	if(!tmp.isArray())
@@ -31,17 +34,14 @@ Course::Course(Json::Value* data)
 		throw new CString("Json for Course not valid!");
 	credits = D["credits_parsed"].asInt();
 
-	if(!D["location"].isString())
-		throw new CString("Json for Course not valid!");
-	this->location = new CString(D["location"].asCString());
-	
-	if(!D["code"].isString())
-		throw new CString("Json for Course not valid!");
-	this->code = new CString(D["code"].asCString());
+	addstr(location)
+	addstr(code)
+	addstr(department)
+	addstr(professor)
 
 	if(!D["obligatory_tf"].isBool())
 		throw new CString("Json for Course not valid!");
-	this->obligatory = D["credits_parsed"].asBool();
+	this->obligatory = D["obligatory_tf"].asBool();
 }
 
 
@@ -86,14 +86,16 @@ void Course::set_list_head(CListCtrl* listView)
 void Course::to_list(CListCtrl* listView,short* class_table,short value)
 {
 	CString msg,tmp;
-
+	msg = *department + _T("\n");
 	if(obligatory)
-		msg.Format(_T("課程名稱:%s 必修\n"),*title);
+		msg += _T(" 必修\n");
 	else
-		msg.Format(_T("課程名稱:%s 選修\n"),*title);
+		msg += _T(" 選修\n");
+	msg += _T("課程名稱:\n");
+	msg += *title;
 	for (int i = 0; i < time->size(); i++)
 		msg += (*time)[i]->toString() + CString("\n");
-	tmp.Format(_T("學分數:%d\n上課位置:%s\n選課號碼:%s\n"),credits,*location,*code);
+	tmp.Format(_T("學分數:%d\n上課位置:%s\n上課老師:%s\n選課號碼:%s\n"),credits,*location,*professor,*code);
 	msg += tmp;
 	AfxMessageBox(msg);
 	
