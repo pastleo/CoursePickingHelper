@@ -1,0 +1,86 @@
+{
+    "course": [{
+        "number_parsed": 31,
+        "department": "文學院",
+        "hours_parsed": 3,
+        "number": "31",
+        "obligatory": "選修",
+        "obligatory_tf": false,
+        "credits": "3",
+        "professor": "郭政忠",
+        "hours": "3",
+        "year": "半",
+        "time_parsed": [{
+            "day": 1,
+            "time": [6, 7, 8]
+        }],
+        "code": "1903",
+        "title": "Marketing of Digital Content Industry",
+        "location": "Y304",
+        "credits_parsed": 3,
+        "language": "中文",
+        "time": "1678"
+    }, {
+        "number_parsed": 31,
+        "department": "文學院",
+        "hours_parsed": 3,
+        "number": "31",
+        "obligatory": "選修",
+        "obligatory_tf": false,
+        "credits": "3",
+        "professor": "余國強",
+        "hours": "3",
+        "year": "半",
+        "time_parsed": [{
+            "day": 4,
+            "time": [5, 6, 7]
+        }],
+        "code": "1904",
+        "title": "Audio-visual Creation",
+        "location": "AA110",
+        "credits_parsed": 3,
+        "language": "中文",
+        "time": "4567"
+    }, {
+        "number_parsed": 31,
+        "department": "文學院",
+        "hours_parsed": 2,
+        "number": "31",
+        "obligatory": "選修",
+        "obligatory_tf": false,
+        "credits": "2",
+        "professor": "趙寧宇",
+        "hours": "2",
+        "year": "半",
+        "time_parsed": [{
+            "day": 4,
+            "time": [5, 6]
+        }],
+        "code": "1905",
+        "title": "Playwriting",
+        "location": "Y308",
+        "credits_parsed": 2,
+        "language": "中文",
+        "time": "456"
+    }, {
+        "number_parsed": 31,
+        "department": "文學院",
+        "hours_parsed": 2,
+        "number": "31",
+        "obligatory": "選修",
+        "obligatory_tf": false,
+        "credits": "2",
+        "professor": "郭俊桔",
+        "hours": "2",
+        "year": "半",
+        "time_parsed": [{
+            "day": 2,
+            "time": [7, 8]
+        }],
+        "code": "1906",
+        "title": "Digital Archives Project",
+        "location": "Y1307",
+        "credits_parsed": 2,
+        "time": "278"
+    }]
+}
