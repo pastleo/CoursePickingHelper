@@ -64,7 +64,6 @@ void Course::set_list_head(CListCtrl* listView)
 	listView->InsertColumn(0,_T(""),0,50);
 
 	listView->DeleteAllItems();
-	int row = listView->GetItemCount();
 	CString tmp;
 #define addrow(X) listView->InsertItem(0,_T(#X));
 
@@ -85,33 +84,56 @@ void Course::set_list_head(CListCtrl* listView)
 
 void Course::to_list(CListCtrl* listView,short* class_table,short value)
 {
-	CString msg,tmp;
-	msg = *department + _T("\n");
-	if(obligatory)
-		msg += _T(" 必修\n");
-	else
-		msg += _T(" 選修\n");
-	msg += _T("課程名稱:\n");
-	msg += *title;
+	to_list(listView,class_table,value,false);
+}
+
+void Course::to_list(CListCtrl* listView,short* class_table,short value,bool unset)
+{
+	CString* c = unset ? new CString("") : title;
+	short v = unset ? -1 : value;
+
+	if(unset) goto set_view;
+
+	set_table:
 	for (int i = 0; i < time->size(); i++)
-		msg += (*time)[i]->toString() + CString("\n");
-	tmp.Format(_T("學分數:%d\n上課位置:%s\n上課老師:%s\n選課號碼:%s\n"),credits,*location,*professor,*code);
-	msg += tmp;
-	AfxMessageBox(msg);
-	
-	for (int i = 0; i < time->size(); i++)
-		(*time)[i]->set_hour(class_table,value);
+		(*time)[i]->set_hour(class_table,v);
+
+	if(unset) return;
+
+	set_view:
 	for (int i = 0; i < 5; i++)
-	{
 		for (int j = 0; j < 13; j++)
-		{
 			if(*(class_table + i*13 + j) == value)
-				listView->SetItemText(j,i+1,*title);
-		}
-	}
+					listView->SetItemText(j,i+1,*c);
+
+	if(unset) goto set_table;
 }
 
 void Course::to_combobox(CComboBox* listView)
 {
 	listView->InsertString(0,*(title));
+}
+
+CString Course::toString()
+{
+	CString msg,tmp;
+	msg = *department;
+	if(obligatory)
+		msg += _T(" 必修\n");
+	else
+		msg += _T(" 選修\n");
+	msg += _T("課程名稱:\n");
+	msg += *title + _T("\n");
+	for (int i = 0; i < time->size(); i++)
+		msg += (*time)[i]->toString() + CString("\n");
+	tmp.Format(_T("學分數:%d\n上課位置:%s\n上課老師:%s\n選課號碼:%s\n"),credits,*location,*professor,*code);
+	msg += tmp;
+	return msg;
+}
+
+CString Course::toCodeStr()
+{
+	CString msg;
+	msg = *code + _T(" > ") + *title;
+	return msg;
 }

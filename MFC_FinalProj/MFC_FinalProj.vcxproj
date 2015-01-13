@@ -105,6 +105,7 @@
     <ClInclude Include="ClockMain.h" />
     <ClInclude Include="ClockSet.h" />
     <ClInclude Include="CMCI.h" />
+    <ClInclude Include="ConfirmBox.h" />
     <ClInclude Include="CountDown.h" />
     <ClInclude Include="Course.h" />
     <ClInclude Include="Course_time.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="ClockMain.cpp" />
     <ClCompile Include="ClockSet.cpp" />
     <ClCompile Include="CMCI.cpp" />
+    <ClCompile Include="ConfirmBox.cpp" />
     <ClCompile Include="CountDown.cpp" />
     <ClCompile Include="Course.cpp" />
     <ClCompile Include="Course_time.cpp" />
@@ -139,7 +141,7 @@
     <None Include="res\MFC_FinalProj.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\MFC_FinalProj.ico" />
+    <Image Include="res\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\lib_json.lib" />

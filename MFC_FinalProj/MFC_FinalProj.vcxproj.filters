@@ -60,6 +60,9 @@
     <ClInclude Include="Course_time.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="ConfirmBox.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFC_FinalProj.cpp">
@@ -95,6 +98,9 @@
     <ClCompile Include="Course_time.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="ConfirmBox.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MFC_FinalProj.rc">
@@ -107,7 +113,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\MFC_FinalProj.ico">
+    <Image Include="res\Icon.ico">
       <Filter>資源檔</Filter>
     </Image>
   </ItemGroup>

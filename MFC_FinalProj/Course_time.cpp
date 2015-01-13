@@ -31,7 +31,7 @@ void Course_time::set_hour(short* input,short value) // input must be short[5][1
 {
 	for (int i = 0; i < time->size(); i++)
 	{
-		if(*(input + (day-1)*13 + (*time)[i] - 1) != -1)
+		if((*(input + (day-1)*13 + (*time)[i] - 1) != -1) && (value != -1))
 			throw new CString(_T("There is a collision!"));
 		*(input + (day-1)*13 + (*time)[i] - 1) = value;
 	}

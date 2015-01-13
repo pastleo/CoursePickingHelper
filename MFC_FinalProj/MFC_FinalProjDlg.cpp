@@ -7,6 +7,7 @@
 #include "MFC_FinalProjDlg.h"
 #include "afxdialogex.h"
 #include "ClockMain.h"
+#include "ConfirmBox.h"
 #include "shutdown_method.h"
 #include <iostream>
 #include <fstream>
@@ -73,7 +74,8 @@ void CMFC_FinalProjDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_STOPWATCH, m_st_stopwatch);
 	DDX_Control(pDX, IDC_ADD_CLASS, m_com_addclass);
 	DDX_Control(pDX, IDC_CLASS_TABLE, m_list_classtable);
-	DDX_Control(pDX, IDC_IMPORT, m_btn_import_clear);
+	DDX_Control(pDX, IDC_UNSET, m_com_unset);
+	DDX_Control(pDX, IDC_GET_CODE, m_btn_import_getcode);
 }
 
 BEGIN_MESSAGE_MAP(CMFC_FinalProjDlg, CDialogEx)
@@ -93,10 +95,12 @@ BEGIN_MESSAGE_MAP(CMFC_FinalProjDlg, CDialogEx)
 	ON_MESSAGE(WM_MYMESSAGE_SENDSHUTDOWNTOMAIN, &CMFC_FinalProjDlg::rcvfromShutDown) 
 	ON_BN_CLICKED(IDC_BUTTONSHUTDOWN, &CMFC_FinalProjDlg::OnBnClickedButtonshutdown)
 	ON_BN_CLICKED(IDC_BUTTON_STOPSHUTDOWN, &CMFC_FinalProjDlg::OnBnClickedButtonStopshutdown)
-	ON_BN_CLICKED(IDC_IMPORT, &CMFC_FinalProjDlg::OnBnClickedImport)
 	ON_CBN_DROPDOWN(IDC_ADD_CLASS, &CMFC_FinalProjDlg::OnCbnDropdownAddClass)
 	ON_NOTIFY(NM_CLICK, IDC_CLASS_TABLE, &CMFC_FinalProjDlg::OnNMClickClassTable)
 	ON_CBN_SELCHANGE(IDC_ADD_CLASS, &CMFC_FinalProjDlg::OnCbnSelchangeAddClass)
+	ON_CBN_SELCHANGE(IDC_UNSET, &CMFC_FinalProjDlg::OnCbnSelchangeUnset)
+	ON_CBN_DROPDOWN(IDC_UNSET, &CMFC_FinalProjDlg::OnCbnDropdownUnset)
+	ON_BN_CLICKED(IDC_GET_CODE, &CMFC_FinalProjDlg::OnBnClickedGetCode)
 END_MESSAGE_MAP()
 
 
@@ -151,13 +155,15 @@ BOOL CMFC_FinalProjDlg::OnInitDialog()
 	stopwatchflag = false;
 
 	m_list_classtable.InsertColumn(0,_T(""),0,200);
-	m_list_classtable.InsertItem(0,_T("點這裡匯入課程"));
-	m_com_addclass.SetCueBanner(_T("點這裡匯入課程"));
+	m_list_classtable.InsertItem(0,_T("請匯入課程"));
+	m_com_addclass.SetCueBanner(_T("請匯入課程"));
+	m_com_unset.SetCueBanner(_T("請匯入課程"));
 	course_loaded = false;
 	class_table = new short[65];
 	for (int i = 0; i < 65; i++)
 		class_table[i] = -1;
 	chosen = new std::vector<int>();
+	credit = 0;
 
 	return TRUE;  // 傳回 TRUE，除非您對控制項設定焦點
 }
@@ -662,11 +668,9 @@ void CMFC_FinalProjDlg::OnBnClickedButtonStopshutdown()
 	else {
 		TRACE ("Failed to abort\n");
 	}
-
-
 }
 
-void CMFC_FinalProjDlg::OnBnClickedImport()
+void CMFC_FinalProjDlg::import()
 {
 	if(course_loaded){
 		for (int i = 0; i < 65; i++)
@@ -713,38 +717,31 @@ void CMFC_FinalProjDlg::OnBnClickedImport()
 			for (int i = 0; i < courses->size(); i++)
 				(*courses)[i]->to_combobox(&m_com_addclass);
 			m_com_addclass.SetCueBanner(_T("從這裡選擇要加入的課程"));
-			m_btn_import_clear.SetWindowTextW(_T("清空課表"));
+			m_com_unset.SetCueBanner(_T("按我觀看已選取的課程清單，選取之可清除"));
+			m_btn_import_getcode.SetWindowTextW(_T("取得課程代碼列表"));
 			Course::set_list_head(&m_list_classtable);
 			
 			course_loaded = true;
 			CString import_report;
 			import_report.Format(_T("Import done with %d success and %d failure."),OK_cnt,err_cnt);
 			AfxMessageBox(import_report);
-			update();
 		}
 	}catch(CString* msg){
 		AfxMessageBox(*msg);
 	}
 }
 
-void CMFC_FinalProjDlg::update()
-{
-}
-
 void CMFC_FinalProjDlg::OnCbnDropdownAddClass()
 {
 	if(!course_loaded)
-		OnBnClickedImport();
+		import();
 }
 
 void CMFC_FinalProjDlg::OnNMClickClassTable(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	*pResult = 0;
-	if(!course_loaded){
-		OnBnClickedImport();
-		return;
-	}
+	OnBnClickedGetCode();
 }
 
 void CMFC_FinalProjDlg::OnCbnSelchangeAddClass()
@@ -752,10 +749,65 @@ void CMFC_FinalProjDlg::OnCbnSelchangeAddClass()
 	int cho = m_com_addclass.GetCount() - m_com_addclass.GetCurSel() -1;
 	int new_entry = chosen->size();
 	try{
-		(*courses)[cho]->to_list(&m_list_classtable,class_table,new_entry);
-		chosen->push_back(cho);
+		CString msg = (*courses)[cho]->toString() + _T("\n要加入課表嗎？");
+		ConfirmBox Dlg(&msg);
+		if (Dlg.DoModal() == IDOK){
+			(*courses)[cho]->to_list(&m_list_classtable,class_table,new_entry);
+			(*courses)[cho]->to_combobox(&m_com_unset);
+			chosen->push_back(cho);
+			credit += (*courses)[cho]->credits;
+			update();
+		}
 	}catch(CString* msg){
 		AfxMessageBox(*msg);
 	}
 	m_com_addclass.SetCurSel(-1);
+}
+
+
+void CMFC_FinalProjDlg::OnCbnSelchangeUnset()
+{
+	int selection = m_com_unset.GetCurSel();
+	int cho = m_com_unset.GetCount() - m_com_unset.GetCurSel() -1;
+	int r_index = (*chosen)[cho];
+	try{
+		CString msg = (*courses)[r_index]->toString() + _T("\n要從課表中移除嗎？");
+		ConfirmBox Dlg(&msg);
+		if (Dlg.DoModal() == IDOK){
+			(*courses)[r_index]->to_list(&m_list_classtable,class_table,cho,true);
+			m_com_unset.DeleteString(selection);
+			chosen->erase(chosen->begin() + cho,chosen->begin() + cho + 1);
+			credit -= (*courses)[r_index]->credits;
+			update();
+		}
+	}catch(CString* msg){
+		AfxMessageBox(*msg);
+	}
+	m_com_unset.SetCurSel(-1);
+}
+
+
+void CMFC_FinalProjDlg::OnCbnDropdownUnset()
+{
+	if(!course_loaded)
+		import();
+}
+
+void CMFC_FinalProjDlg::update()
+{
+	CString msg;
+	msg.Format(_T("選課小幫手，目前學分數：%d"),credit);
+	this->SetWindowTextW(msg);
+}
+
+void CMFC_FinalProjDlg::OnBnClickedGetCode()
+{
+	if(!course_loaded){
+		import();
+		return;
+	}
+	CString msg = _T("課程代碼 > 課程名稱\n");
+	for (int i = 0; i < chosen->size(); i++)
+		msg += (*courses)[(*chosen)[i]]->toCodeStr() + _T("\n");
+	AfxMessageBox(msg);
 }

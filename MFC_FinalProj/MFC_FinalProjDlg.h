@@ -43,7 +43,9 @@ protected:
 	std::vector<int>* chosen;
 	short* class_table;
 	bool course_loaded;
+	void import();
 	void update();
+	int credit;
 public:
 	afx_msg void OnBnClickedButton1();
 	CStatic m_st_clockct;
@@ -76,11 +78,14 @@ public:
 	bool stopwatchflag;
 	afx_msg void OnBnClickedButtonshutdown();
 	afx_msg void OnBnClickedButtonStopshutdown();
-	afx_msg void OnBnClickedImport();
 	CComboBox m_com_addclass;
 	CListCtrl m_list_classtable;
 	afx_msg void OnCbnDropdownAddClass();
 	afx_msg void OnNMClickClassTable(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnCbnSelchangeAddClass();
-	CButton m_btn_import_clear;
+	CComboBox m_com_unset;
+	afx_msg void OnCbnSelchangeUnset();
+	afx_msg void OnCbnDropdownUnset();
+	afx_msg void OnBnClickedGetCode();
+	CButton m_btn_import_getcode;
 };
