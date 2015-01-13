@@ -28,6 +28,7 @@ void CClockChange::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBOMIN, m_combo_min);
 	DDX_Control(pDX, IDC_COMBOSEC, m_combo_sec);
 	DDX_Control(pDX, IDC_EDIT1, m_edit_path);
+	DDX_Control(pDX, IDC_CHECK1, m_but_cycle);
 }
 
 
@@ -77,7 +78,10 @@ LRESULT CClockChange::receiver(WPARAM wParam, LPARAM lParam)
 	m_combo_sec.SetCurSel(_wtoi(pRcv[2]));
 	m_edit_path.SetWindowTextW(pRcv[3]);
 	newclock.index = pRcv[4];
-
+	if (pRcv[5] == L"¬O")
+		m_but_cycle.SetCheck(BST_CHECKED);
+	else
+		m_but_cycle.SetCheck(BST_UNCHECKED);
 	return LRESULT();
 }
 
@@ -95,6 +99,10 @@ void CClockChange::OnBnClickedOk()
 		m_combo_min.GetWindowText(newclock.newclock.min);
 		m_combo_sec.GetWindowText(newclock.newclock.sec);
 		m_edit_path.GetWindowText(newclock.newclock.path);
+		if (m_but_cycle.GetCheck() == BST_CHECKED)
+			newclock.newclock.cycle = true;
+		else
+			newclock.newclock.cycle = false;
 
 		CWnd* pWnd = CWnd::GetParent();
 		pWnd->SendMessageW(WM_MYMESSAGE_SENDTOCLOCKMAIN2, (WPARAM)&newclock);

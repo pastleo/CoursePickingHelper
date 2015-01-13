@@ -28,6 +28,8 @@
 		DDX_Control(pDX, IDC_COMBOMIN, m_ComboBoxMin);
 		DDX_Control(pDX, IDC_COMBOSEC, m_ComboBoxSec);
 		DDX_Control(pDX, IDC_EDIT1, m_EditPath);
+		DDX_Control(pDX, IDC_CHECK1, m_but_cycle);
+		DDX_Control(pDX, IDC_CHECK1, m_but_cycle);
 	}
 
 
@@ -75,6 +77,10 @@
 			m_ComboBoxMin.GetWindowText(newclock.min);
 			m_ComboBoxSec.GetWindowText(newclock.sec);
 			m_EditPath.GetWindowText(newclock.path);
+			if (m_but_cycle.GetCheck() == BST_CHECKED)
+				newclock.cycle = true;
+			else
+				newclock.cycle = false;
 
 			CWnd* pWnd = CWnd::GetParent();
 			pWnd->SendMessageW(WM_MYMESSAGE_SENDTOCLOCKMAIN, (WPARAM)&newclock);

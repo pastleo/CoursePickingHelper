@@ -28,6 +28,7 @@ void CCountDown::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBOMIN, m_combo_min);
 	DDX_Control(pDX, IDC_COMBOSEC, m_combo_sec);
 	DDX_Control(pDX, IDC_EDIT1, m_edit_path);
+	DDX_Control(pDX, IDC_CHECK1, m_but_cycle);
 }
 
 
@@ -55,7 +56,7 @@ BOOL CCountDown::OnInitDialog()
 		m_combo_min.AddString(tp);
 		m_combo_sec.AddString(tp);
 	}
-	for (int i=0; i<4; i++)
+	for (int i=0; i<5; i++)
 		send[i] = "";
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -77,6 +78,10 @@ void CCountDown::OnBnClickedOk()
 		m_combo_min.GetWindowText(send[1]);
 		m_combo_sec.GetWindowText(send[2]);
 		m_edit_path.GetWindowText(send[3]);
+		if (m_but_cycle.GetCheck() == BST_CHECKED)
+			send[4] = L"¬O";
+		else
+			send[4] = L"§_";
 
 		CWnd* pWnd = CWnd::GetParent();
 		pWnd->SendMessageW(WM_MYMESSAGE_SENDCOUNTDOWNDATA, (WPARAM)&send);

@@ -38,4 +38,5 @@ public:
 	afx_msg void OnBnClickedOk();
 	ClockChange newclock;
 	afx_msg void OnBnClickedButtonSelfile();
+	CButton m_but_cycle;
 };

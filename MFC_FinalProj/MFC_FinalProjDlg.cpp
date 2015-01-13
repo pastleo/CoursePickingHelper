@@ -238,6 +238,7 @@ LRESULT CMFC_FinalProjDlg::rcvfromClockMain(WPARAM wParam, LPARAM lParam)
 		use[i].min = Rcv.pClkLiveRet[i].min;
 		use[i].sec = Rcv.pClkLiveRet[i].sec;
 		use[i].path = Rcv.pClkLiveRet[i].path;
+		use[i].cycle = Rcv.pClkLiveRet[i].cycle;
 		use[i].check = false;
 	}
 	clock_ct = Rcv.enable_clock_ct;
@@ -280,8 +281,8 @@ LRESULT CMFC_FinalProjDlg::rcvfromClockMain(WPARAM wParam, LPARAM lParam)
 		if (e == 0) 
 		{
 			CStdioFile myFile(fStream);  // open the file from this stream
-			CString tp1, tp2, tp3, tp4, tp5, tp;
-			tp1.Format (L"\n%d\n", Rcv.clock_ct);			//count
+			CString tp1, tp2, tp3, tp4, tp5, tp6, tp;
+			tp1.Format (L"\n%d\n", Rcv.clock_ct);		//count
 			myFile.WriteString(tp1);
 			for (int i=0; i<Rcv.clock_ct; i++)
 			{
@@ -293,7 +294,11 @@ LRESULT CMFC_FinalProjDlg::rcvfromClockMain(WPARAM wParam, LPARAM lParam)
 					tp5 = L"1";
 				else
 					tp5 = L"0";
-				tp = (tp1 + L"\t" + tp2 + L"\t" + tp3 + L"\t" + tp4 + L"\t" + tp5 + L"\n");
+				if (Rcv.pClkRet[i].cycle)
+					tp6 = L"是";
+				else
+					tp6 = L"否";
+				tp = (tp1 + L"\t" + tp2 + L"\t" + tp3 + L"\t" + tp4 + L"\t" + tp5 + L"\t" + tp6 + L"\n");
 				myFile.WriteString(tp);
 			}
 			myFile.Close();
@@ -321,7 +326,7 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		{
 			//TRACE("settimeid = %d\n", settimeid);
 			mymci= new CMCI(use[settimeid].path, L"MPEGAudio");
-			mymci->Play(0, 500);
+			mymci->Play(0, 500, use[settimeid].cycle);
 
 			if (MessageBox(msgboxstr, L"鬧鐘", MB_ICONINFORMATION | MB_OK) == IDOK)
 			{
@@ -337,8 +342,6 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 					int thisabs, smlestabs=2147483647, smlestid=-1, i;
 					for (i=0; i<clock_ct; i++)
 					{
-						//if (!isused[i])
-						//{
 						int a, b, c;
 						a = _wtoi(use[i].hr)*3600;
 						b = _wtoi(use[i].min)*60;
@@ -349,10 +352,6 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 						smlestabs = min(thisabs, smlestabs);
 						if (smlestabs == thisabs)
 							smlestid = i;
-						//}
-						//}
-						//else 
-						//	continue;
 					}
 					if (smlestid != -1)
 					{
@@ -401,7 +400,10 @@ void CMFC_FinalProjDlg::OnTimer(UINT_PTR nIDEvent)
 		{
 			KillTimer(2);
 			mymci2= new CMCI(CountDownData[3], L"MPEGAudio");
-			mymci2->Play(0, 500);
+			if (CountDownData[4] == L"是")
+				mymci2->Play(0, 500, true);
+			else
+				mymci2->Play(0, 500, false);
 			CString msgboxstr = L"倒數計時已經結束囉!";
 			if (MessageBox(msgboxstr, L"倒數計時器", MB_ICONINFORMATION | MB_OK) == IDOK)
 			{
@@ -499,6 +501,7 @@ LRESULT CMFC_FinalProjDlg::rcvfromCountDown(WPARAM wParam, LPARAM lParam) {
 	CountDownData[1] = pRcv[1];
 	CountDownData[2] = pRcv[2];
 	CountDownData[3] = pRcv[3];
+	CountDownData[4] = pRcv[4];
 
 	CString tp = CountDownData[0] + L":" + CountDownData[1] + L":" + CountDownData[2];
 	if (tp == "00:00:00") {
@@ -509,7 +512,7 @@ LRESULT CMFC_FinalProjDlg::rcvfromCountDown(WPARAM wParam, LPARAM lParam) {
 	m_st_timertext.SetWindowTextW(tp);
 	GetDlgItem(IDC_BUTTON_PLAYPAUSE)->ShowWindow(SW_SHOW);
 	GetDlgItem(IDC_BUTTONSTOP)->ShowWindow(SW_SHOW);
-	//SetTimer(2, 1000, NULL);
+
 	return LRESULT();
 }
 
@@ -517,12 +520,14 @@ void CMFC_FinalProjDlg::OnBnClickedButtonPlaypause()
 {
 	CString tp;
 	m_but_playpause.GetWindowTextW(tp);
-	if (tp == L"▶ / ||" || tp == L"▶") { //第一次按->開始
+	if (tp == L"▶ / ||" || tp == L"▶")		//第一次按->開始
+	{
 		tp = L"||";
 		m_but_playpause.SetWindowTextW(tp);
 		SetTimer(2, 1000, NULL);
 	}
-	else if (tp == L"||") { //停止狀態
+	else if (tp == L"||")					//停止狀態
+	{
 		tp = L"▶";
 		m_but_playpause.SetWindowTextW(tp);
 		KillTimer(2);

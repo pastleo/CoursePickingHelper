@@ -25,8 +25,9 @@ public:
 	CComboBox m_combo_min;
 	CComboBox m_combo_sec;
 	CEdit m_edit_path;
-	CString send[4];
+	CString send[5];
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButtonSelfile();
+	CButton m_but_cycle;
 };

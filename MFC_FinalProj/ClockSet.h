@@ -4,7 +4,7 @@
 #define WM_MYMESSAGE_SENDTOCLOCKMAIN (WM_USER + 2)
 
 struct Clock {
-	bool check;
+	bool check, cycle;
 	CString hr, min, sec, path;
 };
 
@@ -35,4 +35,5 @@ public:
 	Clock newclock;
 	CEdit m_EditPath;
 	afx_msg void OnBnClickedButtonSelfile();
+	CButton m_but_cycle;
 };
