@@ -60,7 +60,7 @@ public:
 	CMCI *mymci, *mymci2;
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	CString settimestr, settimepath;
-	CString CountDownData[4];
+	CString CountDownData[5];
 	int settimeid, clock_ct;
 	CStatic m_st_nowtime;
 	afx_msg void OnBnClickedButtoncountdown();

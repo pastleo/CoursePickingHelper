@@ -1,5 +1,5 @@
 #include "stdafx.h"  
-#include "CMCI.h"  
+#include "CMCI.h"
 #pragma comment(lib, "winmm.lib ")  
 
 CMCI::CMCI(CString FilePath,CString DeviceType=L"MPEGAudio")  
@@ -19,17 +19,30 @@ CMCI::~CMCI()
 {  
 	if(this->m_iDeviceType) Close();  
 }  
-void CMCI::Play(UINT From, UINT To)  
+void CMCI::Play(UINT From, UINT To, bool cycle)  
 {  
 	MCI_PLAY_PARMS pm;  
 	pm.dwCallback=0;  
 	pm.dwFrom=From;  
 	pm.dwTo=To;  
 	if(!this->m_iDeviceType) return;  
-	mciSendCommand(this->m_iDeviceType,  
+	if (cycle == true)
+	{
+		mciSendCommand(this->m_iDeviceType,  
+		MCI_PLAY,  
+		MCI_DGV_PLAY_REPEAT,				//#include <Digitalv.h>
+		(DWORD)&pm); 
+
+	}
+	else 
+	{
+		mciSendCommand(this->m_iDeviceType,  
 		MCI_PLAY,  
 		MCI_NOTIFY,  
-		(DWORD)&pm);  
+		(DWORD)&pm); 
+	}
+
+ 
 }  
 void CMCI::Close()  
 {  

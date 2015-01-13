@@ -53,14 +53,15 @@ BOOL CClockMain::OnInitDialog()
 
 	m_ListCtrl.SetExtendedStyle(LVS_EX_CHECKBOXES | LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT); //勾選,選整行
 	m_ListCtrl.InsertColumn(0,L"時間",0,125,50);
-	m_ListCtrl.InsertColumn(1,L"播放檔案",0,600,50);
-
+	m_ListCtrl.InsertColumn(1,L"播放檔案",0,500,50);
+	m_ListCtrl.InsertColumn(2,L"是否循環",0,100,50);
 	for (int i=0; i<1000; i++) {
 		clock[i].check = false;
 		clock[i].hr = L"";
 		clock[i].min = L"";
 		clock[i].sec = L"";
 		clock[i].path = L"";
+		clock[i].cycle = false;
 	}
 
 	Sender.pClkRet = clock;
@@ -83,7 +84,7 @@ BOOL CClockMain::OnInitDialog()
 	m_st_nowtime.SetWindowTextW(tp);
 	StartTimer();
 
-	CString tp_arr[5];
+	CString tp_arr[6];
 	CStdioFile myFile;
 	CFileException fileException;
 	int n, tp_len, count=0, i, readcount = 0;
@@ -124,6 +125,11 @@ BOOL CClockMain::OnInitDialog()
 				}
 				else 
 					clock[count].check = false;
+				if (tp_arr[5] == L"是") {
+					clock[count].cycle = true;
+				}
+				else
+					clock[count].cycle = false;
 				count++;
 			}
 		}
@@ -135,7 +141,12 @@ BOOL CClockMain::OnInitDialog()
 		m_ListCtrl.InsertItem(i, tp);						//count
 		tp = clock[i].hr + L":" + clock[i].min + L":" + clock[i].sec;
 		m_ListCtrl.SetItemText(i,0, tp);					//time
-		m_ListCtrl.SetItemText(i,1, clock[i].path);		//path
+		m_ListCtrl.SetItemText(i,1, clock[i].path);			//path
+		if (clock[i].cycle)
+			tp = L"是";
+		else
+			tp = L"否";
+		m_ListCtrl.SetItemText(i,2, tp);					//cycle
 
 		if (clock[i].check)
 			m_ListCtrl.SetItemState(i, INDEXTOSTATEIMAGEMASK(2), LVIS_STATEIMAGEMASK);
@@ -166,6 +177,7 @@ LRESULT CClockMain::rcvfromset(WPARAM wParam, LPARAM lParam) {
 	clock[Sender.clock_ct].min = rcv->min;
 	clock[Sender.clock_ct].sec = rcv->sec;
 	clock[Sender.clock_ct].path = rcv->path;
+	clock[Sender.clock_ct].cycle = rcv->cycle;
 
 	CString tp;
 	tp.Format(L"Clock%d", Sender.clock_ct);
@@ -173,6 +185,11 @@ LRESULT CClockMain::rcvfromset(WPARAM wParam, LPARAM lParam) {
 	tp.Format(L"%s:%s:%s", clock[Sender.clock_ct].hr, clock[Sender.clock_ct].min, clock[Sender.clock_ct].sec);
 	m_ListCtrl.SetItemText(Sender.clock_ct, 0, tp);
 	m_ListCtrl.SetItemText(Sender.clock_ct, 1, clock[Sender.clock_ct].path);
+	if (clock[Sender.clock_ct].cycle == true)
+		tp = L"是";
+	else
+		tp = L"否";
+	m_ListCtrl.SetItemText(Sender.clock_ct, 2, tp);
 	m_ListCtrl.SetItemData(0, 0); //for sorting
 
 	Sender.clock_ct++;
@@ -188,10 +205,16 @@ LRESULT CClockMain::rcvfromchange(WPARAM wParam, LPARAM lParam) {
 	clock[index].min = rcv->newclock.min;
 	clock[index].sec = rcv->newclock.sec;
 	clock[index].path = rcv->newclock.path;
+	clock[index].cycle = rcv->newclock.cycle;
 
 	tp.Format(L"%s:%s:%s", clock[index].hr, clock[index].min, clock[index].sec);
 	m_ListCtrl.SetItemText(index, 0, tp);
 	m_ListCtrl.SetItemText(index, 1, clock[index].path);
+	if (clock[index].cycle)
+		tp = L"是";
+	else
+		tp = L"否";
+	m_ListCtrl.SetItemText(index, 2, tp);
 
 	return LRESULT();
 }
@@ -207,12 +230,13 @@ void CClockMain::OnBnClickedOk()
 			liveclock[j].hr = clock[i].hr;
 			liveclock[j].min = clock[i].min;
 			liveclock[j].sec = clock[i].sec;
+			liveclock[j].cycle = clock[i].cycle;
 			liveclock[j++].path = clock[i].path;
 		}
 	}
-	CWnd* pWnd = CWnd::FindWindowW(NULL, L"主頁面");
-	pWnd->SendMessageW(WM_MYMESSAGE_SENDTOMAIN, (WPARAM)&Sender);
 
+	CWnd* pWnd = CWnd::GetParent();
+	pWnd->SendMessageW(WM_MYMESSAGE_SENDTOMAIN, (WPARAM)&Sender);
 
 	CDialogEx::OnOK();
 }
@@ -234,6 +258,7 @@ void CClockMain::OnBnClickedButtondel()
 			clock[i].min = clock[i+1].min;
 			clock[i].sec = clock[i+1].sec;
 			clock[i].path = clock[i+1].path;
+			clock[i].cycle = clock[i+1].cycle;
 		}
 		m_ListCtrl.DeleteItem(row);
 		Sender.clock_ct -= 1;
@@ -322,12 +347,16 @@ void CClockMain::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 	int row = m_ListCtrl.GetSelectionMark();
 	if(row < 0)
 		return;
-	CString str[5];
+	CString str[6];
 	str[0] = clock[row].hr;
 	str[1] = clock[row].min;
 	str[2] = clock[row].sec;
 	str[3] = clock[row].path;
 	str[4].Format(L"%d", row);
+	if (clock[row].cycle)
+		str[5] = L"是";
+	else
+		str[5] = L"否";
 	CClockChange *dlg = new CClockChange();
 	if (dlg != NULL) {
 		BOOL ret = dlg->Create(IDD_DIALOG_CLOCKCHANGE, this);
@@ -339,7 +368,6 @@ void CClockMain::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 	}
 	else
 		AfxMessageBox(_T("Error Creating Dialog Object"));
-
 
 	*pResult = 0;
 }
