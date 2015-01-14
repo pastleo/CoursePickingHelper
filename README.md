@@ -203,7 +203,7 @@ I have used the C++ library [Jsoncpp](https://github.com/open-source-parsers/jso
 
 After this semaster is over, I might design a website with a friend who is great in designing to share and choose course just like this project. I program and she design. I think that will be great!
 
-In this class, I learned more things about the OO part of C++, `.NET` languages like `C++/CLI` and the final MFC that create the oringal windows program. Most importantly, I think I learned time control in this class and meet new friend in class. Thank you teacher!
+In this class, I learned more things about the OO part of C++, `.NET` languages like `C++/CLI` and the final MFC that create the oringal windows program. Most importantly, I think I learned time control and meet new friend in class. Thank you teacher!
 
 #### 4101040018 資工三 王建舜：
 
