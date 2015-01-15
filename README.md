@@ -67,7 +67,7 @@ Finally, the fourth is a stop watch.
 
 ![14.png](http://i.imgur.com/kvMJ2FK.png)
 
-> Each time you select or unselect an item, you can view the detial of the courses.
+> Each time you select or unselect an item, you can view the detial of the course.
 
 #### Alarm clock Part
 
