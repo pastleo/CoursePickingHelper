@@ -11,7 +11,7 @@ And, this is a final project of 103 windows programming course by team 8, built 
 
 #### Feature
 
- * implemented in MFC which doesn't depend on .NET things.
+ * implemented in MFC which doesn't depend on .NET Framework.
  * Json-formated course information importing and exporting.
  * alarm clock, countdown timer, stop watch to notify the user to choose course online.
 
@@ -46,7 +46,7 @@ After this, user can save the class they picked to another json file.
 
 The alarm clock has four functions.  
 First one is the alarm clock. You can add at most 1000 clocks.  
-The second one is a countdown timer. You can countdown from 1 second to 24 hours.  
+The second one is a countdown timer. The range is from 1 second to 24 hours.  
 The third is a shutdown timer. You can choose either shutdown or restart your computer.  
 Finally, the fourth is a stop watch.  
 
@@ -59,7 +59,7 @@ Finally, the fourth is a stop watch.
 ![14.png](http://i.imgur.com/2Ck2fMU.png)
 
  * After you choose a file, you can ...
-    * add a course by choose an item from combobox `從這裡選擇要加入的課程`.
+    * add a course by choosing an item from combobox `從這裡選擇要加入的課程`.
         * it will refuse you when there is a collision.
     * view selected course by click the combobox `按我觀看已選取的課程清單，選取之可清除`, and you can remove it by choosing the item you want to remove.
     * save the selected course state by click the button `儲存選課狀態`.
@@ -70,11 +70,11 @@ Finally, the fourth is a stop watch.
 
 #### Alarm clock Part
 
- * This is the main dialog. Then please click “鬧鐘” to enter the main dialog of alarm clock
+ * This is the main dialog. Then please click “鬧鐘” to enter the main dialog of alarm clock.
 
 ![01.png](http://i.imgur.com/98yC3Ee.png)
 
- * The main dialog of the alarm clock is like the picture of the right. In this dialog, you can add at most 1000 clocks if you want.
+ * The main dialog of the alarm clock is like the following picture. In this dialog, you can add at most 1000 clocks if you want.
 
 ![02.png](http://i.imgur.com/u6baul9.png)
 
@@ -90,23 +90,23 @@ Finally, the fourth is a stop watch.
 
 ![05.png](http://i.imgur.com/5UaOXfX.png)
 
- * If you want to delete a row, just right click to highlight the row and click “刪除選定鬧鐘”, then you’ve done.
+ * If you want to delete a row, just right click to highlight the row and click “刪除選定鬧鐘”, then you're done.
 
 ![06.png](http://i.imgur.com/HZigrQA.png)
 
- * If you want to change a clock in a row, just double right click the row and a changing dialog will display. You can edit your data in the dialog. Finally click “確定” to save the changes.
+ * If you want to change a clock in a row, just double click the row and a changing dialog displays. You can edit your data in the dialog. Finally click “確定” to save the changes.
 
 ![07.png](http://i.imgur.com/4BJWgKW.png)
 
 > The time has been changed.
 
- * Notice that you need to right click the checkbox (the box before time) to check it so that the selected clock will be activated. You can see that the number of “已啟用鬧鐘數量” has been changed.
+ * Notice that you need to click the checkbox (the box before time) to check it so that the selected clock will be activated. You can see that the number of “已啟用鬧鐘數量” is changed.
 
 ![08.png](http://i.imgur.com/J8TZa7m.png)
 
 > If you finish adding alarm clocks, please click “確定” button to conform.
 
- * Then it will choose the approximately next time from that time (now). So it will display 8:10, not 12:00. (refer to the previous step)
+ * Then it will choose the approximately next time from that time (i.e. now). So it will display 8:10, not 12:00. (refer to the previous step)
 
 ![09.png](http://i.imgur.com/9wtvZjt.png)
 
