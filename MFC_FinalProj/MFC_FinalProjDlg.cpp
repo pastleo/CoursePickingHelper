@@ -75,7 +75,7 @@ void CMFC_FinalProjDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_ADD_CLASS, m_com_addclass);
 	DDX_Control(pDX, IDC_CLASS_TABLE, m_list_classtable);
 	DDX_Control(pDX, IDC_UNSET, m_com_unset);
-	DDX_Control(pDX, IDC_GET_CODE, m_btn_import_getcode);
+	DDX_Control(pDX, IDC_IMPORT_SAVE, m_btn_import_save);
 }
 
 BEGIN_MESSAGE_MAP(CMFC_FinalProjDlg, CDialogEx)
@@ -100,7 +100,7 @@ BEGIN_MESSAGE_MAP(CMFC_FinalProjDlg, CDialogEx)
 	ON_CBN_SELCHANGE(IDC_ADD_CLASS, &CMFC_FinalProjDlg::OnCbnSelchangeAddClass)
 	ON_CBN_SELCHANGE(IDC_UNSET, &CMFC_FinalProjDlg::OnCbnSelchangeUnset)
 	ON_CBN_DROPDOWN(IDC_UNSET, &CMFC_FinalProjDlg::OnCbnDropdownUnset)
-	ON_BN_CLICKED(IDC_GET_CODE, &CMFC_FinalProjDlg::OnBnClickedGetCode)
+	ON_BN_CLICKED(IDC_IMPORT_SAVE, &CMFC_FinalProjDlg::OnBnClickedImportSave)
 END_MESSAGE_MAP()
 
 
@@ -670,15 +670,10 @@ void CMFC_FinalProjDlg::OnBnClickedButtonStopshutdown()
 	}
 }
 
+/*** CoursePicking Part ***********************************************************************/
+
 void CMFC_FinalProjDlg::import()
 {
-	if(course_loaded){
-		for (int i = 0; i < 65; i++)
-			class_table[i] = -1;
-		Course::set_list_head(&m_list_classtable);
-		return;
-	}
-
 	try{
 		CFileDialog FileDlg(TRUE, CString(".json"), NULL, OFN_HIDEREADONLY,CString(_T("JSON Files (*.json)|*.json|")));
 		CString fname;
@@ -687,24 +682,26 @@ void CMFC_FinalProjDlg::import()
 			fname = FileDlg.GetPathName();
 			ifstream in(fname);
 
+			if(in.fail())
+				throw new CString(_T("File open failed！"));
+
 			Json::Reader reader;
-			Json::Value rootV;
 			Json::Features::all();
 
-			if(!reader.parse(in,rootV,false))
+			if(!reader.parse(in,JsonValue,false))
 				throw new CString("Json File not valid!");
 
 			in.close();
 
-			if(!rootV.isObject())
+			if(!JsonValue.isObject())
 				throw new CString("Json not valid!");
 
-			rootV = rootV["course"];
+			Json::Value rootV = JsonValue["course"];
 			if(!rootV.isArray())
 				throw new CString("Json not valid!");
 			courses = new vector<Course*>();
 
-			int err_cnt = 0,OK_cnt = 0;
+			int err_cnt = 0,OK_cnt = 0,loaded;
 			for (int i = 0; i < rootV.size(); i++){
 				try{
 					courses->push_back(new Course(&rootV[i]));
@@ -716,14 +713,29 @@ void CMFC_FinalProjDlg::import()
 
 			for (int i = 0; i < courses->size(); i++)
 				(*courses)[i]->to_combobox(&m_com_addclass);
+
 			m_com_addclass.SetCueBanner(_T("從這裡選擇要加入的課程"));
 			m_com_unset.SetCueBanner(_T("按我觀看已選取的課程清單，選取之可清除"));
-			m_btn_import_getcode.SetWindowTextW(_T("取得課程代碼列表"));
+			m_btn_import_save.SetWindowTextW(_T("儲存選課狀態"));
 			Course::set_list_head(&m_list_classtable);
 			
 			course_loaded = true;
-			CString import_report;
-			import_report.Format(_T("Import done with %d success and %d failure."),OK_cnt,err_cnt);
+			CString import_report,load_report;
+			import_report.Format(_T("成功匯入 %d 筆課程, %d 筆失敗"),OK_cnt,err_cnt);
+
+			rootV = JsonValue["chosen"];
+			if(rootV.isArray()){
+				loaded = 0;
+				for (int i = 0; i < rootV.size(); i++){
+					if(!rootV[i].isInt())
+						break;
+					add_class(rootV[i].asInt());
+					loaded++;
+				}
+				load_report.Format(_T("\n%d 筆之前的選課紀錄已讀取"),loaded);
+				import_report += load_report;
+			}
+				
 			AfxMessageBox(import_report);
 		}
 	}catch(CString* msg){
@@ -741,7 +753,23 @@ void CMFC_FinalProjDlg::OnNMClickClassTable(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	*pResult = 0;
-	OnBnClickedGetCode();
+	if(!course_loaded){
+		import();
+		return;
+	}
+	CString msg = _T("課程代碼 > 課程名稱 列表：\n");
+	for (int i = 0; i < chosen->size(); i++)
+		msg += (*courses)[(*chosen)[i]]->toCodeStr() + _T("\n");
+	AfxMessageBox(msg);
+}
+
+void CMFC_FinalProjDlg::add_class(int cho)
+{
+	(*courses)[cho]->to_list(&m_list_classtable,class_table,cho);
+	(*courses)[cho]->to_combobox(&m_com_unset);
+	chosen->push_back(cho);
+	credit += (*courses)[cho]->credits;
+	update();
 }
 
 void CMFC_FinalProjDlg::OnCbnSelchangeAddClass()
@@ -751,11 +779,7 @@ void CMFC_FinalProjDlg::OnCbnSelchangeAddClass()
 		CString msg = (*courses)[cho]->toString() + _T("\n要加入課表嗎？");
 		ConfirmBox Dlg(&msg);
 		if (Dlg.DoModal() == IDOK){
-			(*courses)[cho]->to_list(&m_list_classtable,class_table,cho);
-			(*courses)[cho]->to_combobox(&m_com_unset);
-			chosen->push_back(cho);
-			credit += (*courses)[cho]->credits;
-			update();
+			add_class(cho);
 		}
 	}catch(CString* msg){
 		AfxMessageBox(*msg);
@@ -799,14 +823,44 @@ void CMFC_FinalProjDlg::update()
 	this->SetWindowTextW(msg);
 }
 
-void CMFC_FinalProjDlg::OnBnClickedGetCode()
+void CMFC_FinalProjDlg::OnBnClickedImportSave()
 {
 	if(!course_loaded){
 		import();
 		return;
 	}
-	CString msg = _T("課程代碼 > 課程名稱\n");
-	for (int i = 0; i < chosen->size(); i++)
-		msg += (*courses)[(*chosen)[i]]->toCodeStr() + _T("\n");
-	AfxMessageBox(msg);
+
+	try{
+		CFileDialog FileDlg(FALSE, CString(".json"), NULL, OFN_HIDEREADONLY,CString(_T("JSON Files (*.json)|*.json|")));
+		CString fname;
+		if (FileDlg.DoModal() == IDOK)  
+		{  
+			fname = FileDlg.GetPathName();
+
+			Json::StyledStreamWriter* jwritter = new Json::StyledStreamWriter();
+			Json::Features::all();
+
+			Json::Value* vec = new Json::Value(Json::arrayValue);
+			for (int i = 0; i < chosen->size(); i++)
+				vec->append((*chosen)[i]);
+
+			JsonValue["chosen"] = *vec;
+
+			ofstream out(fname);
+
+			if(out.fail())
+				throw new CString(_T("File open failed！"));
+
+			jwritter->write(out,JsonValue);
+
+			if(out.fail())
+				throw new CString(_T("File save failed！"));
+
+			out.close();
+
+			AfxMessageBox(_T("存檔成功！"));
+		}
+	}catch(CString* msg){
+		AfxMessageBox(*msg);
+	}
 }

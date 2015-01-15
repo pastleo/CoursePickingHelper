@@ -39,13 +39,15 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
-	std::vector<Course*>* courses; 
+	std::vector<Course*>* courses;
 	std::vector<int>* chosen;
 	short* class_table;
 	bool course_loaded;
 	void import();
 	void update();
 	int credit;
+	Json::Value JsonValue;
+	void add_class(int cho);
 public:
 	afx_msg void OnBnClickedButton1();
 	CStatic m_st_clockct;
@@ -86,6 +88,6 @@ public:
 	CComboBox m_com_unset;
 	afx_msg void OnCbnSelchangeUnset();
 	afx_msg void OnCbnDropdownUnset();
-	afx_msg void OnBnClickedGetCode();
-	CButton m_btn_import_getcode;
+	afx_msg void OnBnClickedImportSave();
+	CButton m_btn_import_save;
 };
