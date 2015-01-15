@@ -114,11 +114,11 @@ Finally, the fourth is a stop watch.
 
 ![10.png](http://i.imgur.com/ImxWqjK.png)
 
- * The next is the countdown timer. Just click “倒數定時器” then you’ll enter a dialog to set every parameters you need. Then please “確定” to use this setting.
+ * The next is the countdown timer. Just click “倒數定時器” then you’ll enter a dialog to set every parameters you need. Then please click “確定” to use this setting.
 
 ![11.png](http://i.imgur.com/BBesGmA.png)
 
- * Then the remaining time is set by your setting. It also appear another two button. The function is just as the symbol say. You now can click start to countdown. After it count over, a pop up dialog will also show up just like the alarm clock.
+ * Then the remaining time is set by your setting. It also appears another two buttons. The function is just as the symbol say. You now can click start to count down. After it counts to 0, a pop up dialog will show up just like the alarm clock does.
 
 ![12.png](http://i.imgur.com/l0lCjad.png)
 
@@ -138,7 +138,7 @@ Finally, the fourth is a stop watch.
     * The program automatically generated. The start of the APP.
 
  * `MFC_FinalProjDlg.cpp / MFC_FinalProjDlg.h`
-    * The main dialog. It handles with every input data from any dialog that has sent the data and start the corresponding programs.
+    * The main dialog. It handles with every input data and starts the corresponding programs.
     * `void import();`: import the course imformation from a json file
     * `void add_class(int cho);`: add a course to table accroding to `cho` of the index of the course
     * `void update();`: update the credit (學分數) on the title
@@ -159,7 +159,7 @@ Finally, the fourth is a stop watch.
     * These files are associated with the Countdown timer setting dialog. The data input from the dialog will be sent to main dialog.
 
  * `CMCI.cpp / CMCI.h`
-    * These files are associated with the music file playing. By using the MCI (Media Control Interface) functions provided by Windows, you can easily play any media file as you wish.
+    * These files are associated with the music file playing. By using the MCI (Media Control Interface) functions provided by Windows, you can easily play any media files as you wish.
 
  * `ShutDown.cpp / ShutDown.h`
     * These files are associated with Shutdown time setting dialog. The data input from this dialog will send to main dialog.
@@ -209,4 +209,4 @@ In this class, I learned more things about the OO part of C++, `.NET` languages 
 
 #### 4101040018 資工三 王建舜：
 
-By writing this program, I’ve learn a lot from it. I feel I have made progress on my program designing techniques. Most important of all, my partner use GitHub to deal with version control. I would have liked to learn Git for a long time, but I don’t know how to learn this skill. My partner taught me patiently, and finally I do know the most basic part of Git. I’m really appreciated of his teaching.
+By writing this program, I’ve learn a lot from it. I feel I have made progress on my GUI program designing techniques. Most important of all, my partner use GitHub to deal with version control. I would have liked to learn Git for a long time, but I don’t know how to learn this skill. My partner taught me patiently, and finally I do know the most basic part of Git. I’m really appreciated of his teaching.
