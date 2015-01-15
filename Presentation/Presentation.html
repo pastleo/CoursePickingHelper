@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1024">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>選課小幫手 CoursePickingHelper | by 邱冠喻 & 王建舜</title>
+
+    <meta name="generator" content="Slide Show (S9)">
+    <meta name="author" content="邱冠喻 & 王建舜">
+
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+    <style>
+        h1,h2,h3,h4,h5,h6{
+            text-align: center;
+        }
+
+        /*loading style, title and author*/
+        div#loading{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 1s;
+
+            background: white;
+            -webkit-animation: loadingEffect 5s infinite; /* Chrome, Safari, Opera */
+            animation: loadingEffect 5s infinite;
+        }
+        div#loading h1{
+            margin: 0;
+            padding-top: 80px;
+            padding-bottom: 20px;
+
+            background: rgba(182, 215, 213, 1);
+        }
+        div#loading h3{
+            margin: 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            background: rgba(181, 221, 197, 1)
+        }
+        div#loading.done{
+            opacity:0;
+        }
+
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes loadingEffect {
+            0%   {background: rgba(215, 172, 172, 1);}
+            25%  {background: rgba(206, 215, 172, 1);}
+            50%  {background: rgba(172, 215, 206, 1);}
+            100% {background: rgba(215, 172, 172, 1);}
+        }
+
+        /* Standard syntax */
+        @keyframes loadingEffect {
+            0%   {background: rgba(215, 172, 172, 1);}
+            25%  {background: rgba(206, 215, 172, 1);}
+            50%  {background: rgba(172, 215, 206, 1);}
+            100% {background: rgba(215, 172, 172, 1);}
+        }
+
+        /*the background*/
+        body {
+            background: #545454; /* Old browsers */
+            background: -moz-radial-gradient(center, ellipse cover,  #545454 0%, #262626 100%); /* FF3.6+ */
+            background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#545454), color-stop(100%,#262626)); /* Chrome,Safari4+ */
+            background: -webkit-radial-gradient(center, ellipse cover,  #545454 0%,#262626 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-radial-gradient(center, ellipse cover,  #545454 0%,#262626 100%); /* Opera 12+ */
+            background: -ms-radial-gradient(center, ellipse cover,  #545454 0%,#262626 100%); /* IE10+ */
+            background: radial-gradient(ellipse at center,  #545454 0%,#262626 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#545454', endColorstr='#262626',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /*normal step*/
+        .step {
+          color:rgba(124, 177, 143, 1);
+          width: 1024px;
+          height: 576px;
+          padding: 40px 60px;
+
+          font-size: 30px;
+
+          opacity: 0.9;
+          line-height: 1.6;
+
+          transition: all 0.5s ease 0s;
+        }
+
+        .step.future {
+          opacity: 0;
+          pointer-events:none;
+        }
+
+        .step.active {
+          opacity: 1;
+          text-shadow: 0px 0px 20px rgba(0, 38, 104, 1);
+        }
+
+        .step.present {
+            z-index: 100;
+        }
+
+        /*slide step*/
+        .slide {
+          background: black;
+          border-radius: 10px;
+          overflow: auto;
+        }
+
+        .step.unclickable {
+            pointer-events:none;
+        }
+
+        .step.center p {
+            text-align: center;
+        }
+
+        .step.showOnlyWhenPresent {
+            opacity: 0;
+            pointer-events:none;
+        }
+
+        .step.showOnlyWhenPresent.present {
+            opacity: 1;
+            pointer-events:default;
+        }
+
+        /*markdown elements*/
+        h2{
+            margin-top: 20%;
+            margin-bottom: 10px;
+        }
+
+        h4{
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        pre {
+            background-color: rgba(56, 186, 112, 1);
+            padding: 15px;
+            overflow: auto;
+        }
+
+        code {
+            background-color: rgba(56, 186, 112, 0.82);
+            color: #D1CABC;
+            border-radius: 10px;
+            font-family: "Consolas","Montserrat",sans-serif;
+        }
+
+        blockquote {
+            margin: 0px;
+            padding-left: 40px;
+            border-left: 10px solid #000;
+            color: rgba(105, 105, 105, 1)
+        }
+
+        blockquote blockquote{
+            border: none;
+        }
+
+        blockquote p{
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        ul {
+            padding-left: 1.75em;
+            margin: 0px 0px 20px;
+        }
+
+        a {
+            color: rgba(0, 149, 207, 1);
+        }
+
+        strong {
+            color: rgba(134, 109, 81, 1);
+        }
+
+        /*controls*/
+
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .arrow {
+            width: 0px;
+            height: 0px;
+            border: 30px solid rgba(153, 186, 213, 0.5);
+            float: left;
+            margin-right: 30px;
+            -moz-user-select: none;
+        }
+
+        .prev {
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-left-width: 0px;
+            border-right-width: 50px;
+        }
+
+        .prev:hover {
+            border-right-color: rgba(194, 217, 225, 1);
+            cursor: pointer;
+        }
+
+        .next {
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            border-left-width: 50px;
+            border-right-width: 0px;
+        }
+
+        .next:hover{
+            border-left-color: rgba(194, 217, 225, 1);
+            cursor: pointer;
+        }
+
+        
+
+
+
+    </style>
+</head>
+
+<body class="impress-not-supported">
+
+<div id="impress">
+
+    <!-- note: assumes no header (breaking slides w/ SLIDE directive) -->
+
+    <div class='step ' data-x='0' data-y='0' data-scale='4' >
+      <!-- === begin markdown block ===
+
+      generated by markdown/1.2.0 on Ruby 2.2.0 (2014-12-25) [x86_64-darwin14]
+                on 2015-01-15 14:59:50 +0800 with Markdown engine kramdown (1.5.0)
+                  using options {}
+  -->
+
+<!-- _S9SLIDE_  x=0 y=0 scale=4 -->
+
+<h2 id="coursepickinghelper">選課小幫手 CoursePickingHelper</h2>
+
+<h4 id="section">第八組：邱冠喻、王建舜</h4>
+
+
+    </div>
+
+    <div class='step ' data-x='0' data-y='2000' data-rotate='180' data-scale='4' >
+      <!-- _S9SLIDE_  x=0 y=2000 rotate=180 scale=4 -->
+
+<h2 id="feature">Feature</h2>
+
+<ul>
+  <li>implemented in MFC which doesn’t depend on .NET things.</li>
+  <li>Json-formated course information importing and exporting.</li>
+  <li>alarm clock, countdown timer, stop watch to notify the user to choose course online.</li>
+</ul>
+
+
+    </div>
+
+    <div class='step ' data-x='8400' data-y='2000' data-rotate='270' data-scale='10' >
+      <!-- _S9SLIDE_  x=8400 y=2000 rotate=270 scale=10 -->
+
+<h2 id="author--member-contribution">Author &amp; Member contribution</h2>
+
+<h4 id="course-picking-part">4101056017 資工三 邱冠喻 =&gt; 50% Course picking part</h4>
+
+<h4 id="alarm-clock-part">4101040018 資工三 王建舜 =&gt; 50% Alarm clock part</h4>
+
+
+    </div>
+
+    <div class='step ' data-x='14400' data-y='2000' data-rotate='270' data-scale='6' >
+      <!-- _S9SLIDE_  x=14400 y=2000 rotate=270 scale=6 -->
+
+<h2 id="content-usage--live-demo">Content, Usage &amp; Live DEMO</h2>
+
+<h4 id="course-picking-part-1">Course Picking Part</h4>
+
+<h4 id="alarm-clock-part-1">Alarm clock Part</h4>
+
+
+    </div>
+
+    <div class='step ' data-x='16000' data-y='2000' data-rotate='270' data-scale='6' >
+      <!-- _S9SLIDE_  x=16000 y=2000 rotate=270 scale=6 -->
+
+<h2 id="code-description">Code description</h2>
+
+
+    </div>
+
+    <div class='step ' data-x='10000' data-y='12050' data-scale='5' >
+      <!-- _S9SLIDE_  x=10000 y=12050 scale=5 -->
+
+<p><img src="http://i.imgur.com/BRrOQbq.jpg" alt="Big picture" /></p>
+
+
+    </div>
+
+    <div class='step slide unclickable showOnlyWhenPresent' data-x='17000' data-y='12050' data-scale='5' >
+      <!-- _S9SLIDE_  slide unclickable showOnlyWhenPresent x=17000 y=12050 scale=5 -->
+
+<h2 id="thank-you">Thank you!</h2>
+
+<!-- === end markdown block === -->
+
+    </div>
+
+
+</div>
+
+<div id="loading">
+    <h1>選課小幫手 CoursePickingHelper</h1>
+    <h3>邱冠喻 & 王建舜</h3>
+    <div id="circleG">
+    </div>
+</div>
+
+<div class="controls">
+    <div class="arrow prev"></div>
+    <div class="arrow next"></div>
+</div>
+
+<script src="http://netdna.impressjscdn.com/impressjs/0.5.3/js/impress.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+    var impressInstance;
+    $(document).ready(function(){
+        impressInstance = impress();
+        impressInstance.init();
+        /*impressInstance.prev_ori = impressInstance.prev;*/
+        impressInstance.next_ori = impressInstance.next;
+        impressInstance.next = function(){
+            impressInstance.next_ori();
+            $("div.step.active").removeClass("future");
+        };
+        $(".controls .arrow.prev").click(impressInstance.prev);
+        $(".controls .arrow.next").click(impressInstance.next);
+        if(window.location.hash)
+            $("div#impress div.step" + window.location.hash.replace("#/","#")).prevAll().removeClass("future");
+        setTimeout(function(){
+            $('div#loading').addClass('done');
+            setTimeout(function(){
+                $('div#loading').remove();
+
+            },1000);
+        },2000);
+    });
+</script>
+
+</body>
+</html>

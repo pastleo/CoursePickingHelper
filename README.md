@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This small windows application is to let students picks and view their course in a better way combined with notification gadgets like alarm clock, countdown timer...etc.  
+This small windows application is to let students pick and view their course in a better way combined with notification gadgets like alarm clock, countdown timer...etc.  
 In the past semasters, we (might) draw class table on a papper and fill it with our desired course. After that, we may modify it very frequently which is not very convenient.  
 This tool is here to help, after importing a json-formated course information database, you can easily choose your course to fill to table.  
 After this, you can even set some alarm clocks to notify you when it's time to choose course online.
@@ -19,12 +19,12 @@ And, this is a final project of 103 windows programming course by team 8, built 
 
 We are 103 windows programming course final project team 8  
 
- * 4101056017 資工三 邱冠喻
+ * 4101056017 資工三 邱冠喻 50%
     * Course picking part
         * [Json-formated course information generater (also a parser)](https://github.com/chgu82837/university_course_parser/blob/for_WP_proj/subjects/nchu/dept_parser.py) using python
         * Json-formated course information importing using [Jsoncpp](https://github.com/open-source-parsers/jsoncpp)
         * Course picking state saving to Json file using [Jsoncpp](https://github.com/open-source-parsers/jsoncpp)
- * 4101040018 資工三 王建舜
+ * 4101040018 資工三 王建舜 50%
     * Alarm clock part
         * alarm clock
         * countdown timer
@@ -131,6 +131,8 @@ Finally, the fourth is a stop watch.
 ![13.png](http://i.imgur.com/A8HYMdN.png)
 
 ## Code description
+
+![dialog.png](http://i.imgur.com/BRrOQbq.jpg)
 
  * `MFC_FinalProj.cpp / MFC_FinalProj.h`
     * The program automatically generated. The start of the APP.
