@@ -1,8 +1,8 @@
 
 /***************************
 FinalProj_Team_8 1/16
-4101056017 ��u�T ���a�� Chiu Guan-Yu
-4101040018 ��u�T ���ص� 
+4101056017 資工三 邱冠喻 Chiu Guan-Yu
+4101040018 資工三 王建舜 Wang Jian-Shun
 ***************************/
 
 #include "stdafx.h"
@@ -21,34 +21,34 @@ BEGIN_MESSAGE_MAP(CMFC_FinalProjApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-// CMFC_FinalProjApp �غc
+// CMFC_FinalProjApp 建構
 
 CMFC_FinalProjApp::CMFC_FinalProjApp()
 {
-	// �䴩���s�Ұʺ޲z��
+	// 支援重新啟動管理員
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
 
-	// TODO: �b���[�J�غc�{���X�A
-	// �N�Ҧ����n����l�]�w�[�J InitInstance ��
+	// TODO: 在此加入建構程式碼，
+	// 將所有重要的初始設定加入 InitInstance 中
 }
 
 
-// �Ȧ����@�� CMFC_FinalProjApp ����
+// 僅有的一個 CMFC_FinalProjApp 物件
 
 CMFC_FinalProjApp theApp;
 
 
-// CMFC_FinalProjApp ��l�]�w
+// CMFC_FinalProjApp 初始設定
 
 BOOL CMFC_FinalProjApp::InitInstance()
 {
-	// ���p���ε{����T�M����w�ϥ� ComCtl32.dll 6 (�t) �H�᪩���A
-	// �ӱҰʵ�ı�Ƽ˦��A�b Windows XP �W�A�h�ݭn InitCommonControls()�C
-	// �_�h����������إ߳��N���ѡC
+	// 假如應用程式資訊清單指定使用 ComCtl32.dll 6 (含) 以後版本，
+	// 來啟動視覺化樣式，在 Windows XP 上，則需要 InitCommonControls()。
+	// 否則任何視窗的建立都將失敗。
 	INITCOMMONCONTROLSEX InitCtrls;
 	InitCtrls.dwSize = sizeof(InitCtrls);
-	// �]�w�n�]�t�Ҧ��z�Q�n�Ω����ε{������
-	// �q�α�����O�C
+	// 設定要包含所有您想要用於應用程式中的
+	// 通用控制項類別。
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
 
@@ -57,54 +57,54 @@ BOOL CMFC_FinalProjApp::InitInstance()
 
 	AfxEnableControlContainer();
 
-	// �إߴ߼h�޲z���A�H����ܤ���]�t
-	// ����߼h���˵��δ߼h�M���˵�����C
+	// 建立殼層管理員，以防對話方塊包含
+	// 任何殼層樹狀檢視或殼層清單檢視控制項。
 	CShellManager *pShellManager = new CShellManager;
 
-	// �Ұ� [Windows ���] ��ı�ƺ޲z���i�ҥ� MFC ��������D�D
+	// 啟動 [Windows 原生] 視覺化管理員可啟用 MFC 控制項中的主題
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
 
-	// �зǪ�l�]�w
-	// �p�G�z���ϥγo�ǥ\��åB�Q���
-	// �̫᧹�����i�����ɤj�p�A�z�i�H
-	// �q�U�C�{���X�������ݭn����l�Ʊ`���A
-	// �ܧ��x�s�]�w�Ȫ��n�����X
-	// TODO: �z���ӾA�׭ק惡�r��
-	// (�Ҧp�A���q�W�٩β�´�W��)
-	SetRegistryKey(_T("���� AppWizard �Ҳ��ͪ����ε{��"));
+	// 標準初始設定
+	// 如果您不使用這些功能並且想減少
+	// 最後完成的可執行檔大小，您可以
+	// 從下列程式碼移除不需要的初始化常式，
+	// 變更儲存設定值的登錄機碼
+	// TODO: 您應該適度修改此字串
+	// (例如，公司名稱或組織名稱)
+	SetRegistryKey(_T("本機 AppWizard 所產生的應用程式"));
 
 	CMFC_FinalProjDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)
 	{
-		// TODO: �b����m��ϥ� [�T�w] �Ӱ���ϥι�ܤ����
-		// �B�z���{���X
+		// TODO: 在此放置於使用 [確定] 來停止使用對話方塊時
+		// 處理的程式碼
 	}
 	else if (nResponse == IDCANCEL)
 	{
-		// TODO: �b����m��ϥ� [����] �Ӱ���ϥι�ܤ����
-		// �B�z���{���X
+		// TODO: 在此放置於使用 [取消] 來停止使用對話方塊時
+		// 處理的程式碼
 	}
 	else if (nResponse == -1)
 	{
-		TRACE(traceAppMsg, 0, "ĵ�i: ��ܤ���إߥ��ѡA�]���A���ε{���N�~�פ�C\n");
-		TRACE(traceAppMsg, 0, "ĵ�i: �p�G�z�n�b��ܤ���W�ϥ� MFC ����A�h�L�k #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS�C\n");
+		TRACE(traceAppMsg, 0, "警告: 對話方塊建立失敗，因此，應用程式意外終止。\n");
+		TRACE(traceAppMsg, 0, "警告: 如果您要在對話方塊上使用 MFC 控制項，則無法 #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS。\n");
 	}
 
-	// �R���W���ҫإߪ��߼h�޲z���C
+	// 刪除上面所建立的殼層管理員。
 	if (pShellManager != NULL)
 	{
 		delete pShellManager;
 	}
 
-	// �]���w�g������ܤ���A�Ǧ^ FALSE�A�ҥH�ڭ̷|�������ε{���A
-	// �ӫD���ܶ}�l���ε{�����T���C
+	// 因為已經關閉對話方塊，傳回 FALSE，所以我們會結束應用程式，
+	// 而非提示開始應用程式的訊息。
 	return FALSE;
 }
 
 /***************************
 FinalProj_Team_8 1/16
-4101056017 ��u�T ���a�� Chiu Guan-Yu
-4101040018 ��u�T ���ص� 
+4101056017 資工三 邱冠喻 Chiu Guan-Yu
+4101040018 資工三 王建舜 Wang Jian-Shun
 ***************************/
