@@ -1,6 +1,9 @@
 
-// MFC_FinalProj.cpp : 定義應用程式的類別行為。
-//
+/***************************
+FinalProj_Team_8 1/16
+4101056017 資工三 邱冠喻 Chiu Guan-Yu
+4101040018 資工三 王建舜 
+***************************/
 
 #include "stdafx.h"
 #include "MFC_FinalProj.h"
@@ -100,3 +103,8 @@ BOOL CMFC_FinalProjApp::InitInstance()
 	return FALSE;
 }
 
+/***************************
+FinalProj_Team_8 1/16
+4101056017 資工三 邱冠喻 Chiu Guan-Yu
+4101040018 資工三 王建舜 
+***************************/
