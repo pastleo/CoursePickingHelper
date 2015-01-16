@@ -2,7 +2,7 @@
 /***************************
 FinalProj_Team_8 1/16
 4101056017 資工三 邱冠喻 Chiu Guan-Yu
-4101040018 資工三 王建舜 
+4101040018 資工三 王建舜 Wang Jian-Shun
 ***************************/
 
 #include "stdafx.h"
@@ -871,5 +871,5 @@ void CMFC_FinalProjDlg::OnBnClickedImportSave()
 /***************************
 FinalProj_Team_8 1/16
 4101056017 資工三 邱冠喻 Chiu Guan-Yu
-4101040018 資工三 王建舜 
+4101040018 資工三 王建舜 Wang Jian-Shun
 ***************************/
